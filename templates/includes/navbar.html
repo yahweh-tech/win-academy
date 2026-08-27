@@ -1,0 +1,74 @@
+{% load static %}
+<!-- Top Information & Hotline Bar -->
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-bar-trust">
+      <span class="trust-badge-pill"><i class="fas fa-shield-alt"></i> Reg. No. {{ trust_reg_no }}</span>
+      <span>Run by <strong>{{ trust_name }}</strong></span>
+    </div>
+    <div class="top-bar-contacts">
+      <a href="tel:{{ primary_phone|cut:' ' }}" class="hotline-link" title="Call Primary Helpline">
+        <i class="fas fa-phone-alt"></i> {{ primary_phone }}
+      </a>
+      <span style="color: rgba(255,255,255,0.3);">|</span>
+      <a href="tel:{{ secondary_phone|cut:' ' }}" class="hotline-link" title="Call Secondary Helpline">
+        <i class="fas fa-phone-alt"></i> {{ secondary_phone }}
+      </a>
+      <span style="color: rgba(255,255,255,0.3);">|</span>
+      <a href="https://wa.me/91{{ academy_profile.whatsapp_number }}" target="_blank" rel="noopener noreferrer" class="hotline-link" style="color: #4ADE80;">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Sticky Header & Navigation -->
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar">
+      <!-- Logo & Identity -->
+      <a href="{% url 'academy:home' %}" class="brand-logo-container" aria-label="{{ academy_name }}">
+        <img src="{% static 'images/logo.svg' %}" alt="{{ academy_name }}" class="brand-logo-img" height="54">
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Desktop & Mobile Drawer Menu -->
+      <ul class="nav-menu" id="navMenu">
+        <li>
+          <a href="{% url 'academy:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'academy:courses' %}" class="nav-link {% if request.resolver_match.url_name == 'courses' or request.resolver_match.url_name == 'course_detail' %}active{% endif %}">
+            Courses
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'academy:about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+            About Us
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'academy:results' %}" class="nav-link {% if request.resolver_match.url_name == 'results' %}active{% endif %}">
+            Results
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'academy:contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+            Contact
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'academy:admissions' %}" class="nav-cta-btn" id="navAdmissionsBtn">
+            <i class="fas fa-paper-plane"></i> Admissions Open
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

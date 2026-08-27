@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#B91C1C" />
+    </linearGradient>
+    <linearGradient id="gradGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Logo Emblem / Shield -->
+  <g transform="translate(10, 10)" filter="url(#shadow)">
+    <!-- Shield Base -->
+    <path d="M 40 5 L 75 18 C 75 58 40 78 40 78 C 40 78 5 58 5 18 Z" fill="url(#gradRed)" stroke="#FFFFFF" stroke-width="2.5" />
+    <!-- Inner Gold Border -->
+    <path d="M 40 10 L 68 21 C 68 53 40 70 40 70 C 40 70 12 53 12 21 Z" fill="#0A192F" stroke="url(#gradGold)" stroke-width="1.5" />
+    
+    <!-- Bold 'WIN' Monogram inside Shield -->
+    <text x="40" y="44" font-family="'Outfit', 'Arial Black', sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">WIN</text>
+    
+    <!-- Laurel Leaves / Academic Star in Shield -->
+    <polygon points="40,49 42.5,54 48,54.5 44,58 45.5,63.5 40,60 34.5,63.5 36,58 32,54.5 37.5,54" fill="url(#gradGold)" />
+  </g>
+
+  <!-- Text Hierarchy -->
+  <!-- Trust & Reg Badge -->
+  <g transform="translate(102, 22)">
+    <rect x="0" y="0" width="220" height="17" rx="3" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1" />
+    <text x="6" y="12" font-family="'Inter', -apple-system, sans-serif" font-size="9.5" font-weight="700" fill="#92400E" letter-spacing="0.4">WIN EDUCATIONAL TRUST • REG NO. 379/2006</text>
+  </g>
+
+  <!-- Academy Main Title -->
+  <text x="102" y="58" font-family="'Outfit', 'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="25" fill="#0F172A" letter-spacing="0.8">
+    WIN <tspan fill="#DC2626">PROFESSIONAL</tspan> ACADEMY
+  </text>
+
+  <!-- Official Tagline -->
+  <text x="102" y="78" font-family="'Inter', sans-serif" font-weight="600" font-size="11.5" fill="#475569" letter-spacing="0.3">
+    A Complete Guidelines for Higher Education &amp; Job Service
+  </text>
+</svg>

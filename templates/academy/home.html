@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ academy_name }} | {{ tagline }}{% endblock %}
+
+{% block content %}
+<!-- ==========================================================================
+     HERO SECTION
+     ========================================================================== -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+      <!-- Left Column: Branding, Title, Tagline & CTAs -->
+      <div>
+        <div class="hero-trust-tag">
+          <i class="fas fa-award text-gold"></i>
+          <span>Run by {{ trust_name }} (Reg. No. {{ trust_reg_no }})</span>
+        </div>
+
+        <h1 class="hero-title">
+          WIN <span class="highlight-red">PROFESSIONAL</span> ACADEMY
+        </h1>
+
+        <div class="hero-tagline-quote">
+          <i class="fas fa-quote-left" style="font-size: 0.9rem; opacity: 0.7;"></i>
+          <span>{{ tagline }}</span>
+        </div>
+
+        <p class="hero-lead-text">
+          Tamil Nadu's premier institution for specialized <strong>Mathematics coaching</strong> (Engineering, TRB, CSIR-NET, GATE, JAM) and comprehensive <strong>higher education admission guidance</strong> across Medical, Paramedical, Engineering, Agriculture, Law, and Arts &amp; Science colleges in Tamil Nadu, India, and Abroad.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="{% url 'academy:courses' %}" class="btn btn-primary">
+            <i class="fas fa-book-open"></i> Explore Courses
+          </a>
+          <a href="{% url 'academy:admissions' %}" class="btn btn-gold">
+            <i class="fas fa-paper-plane"></i> Apply for Admission
+          </a>
+          <a href="{% url 'academy:contact' %}" class="btn btn-outline-white">
+            <i class="fas fa-phone-alt"></i> Contact Us
+          </a>
+        </div>
+
+        <!-- Metric Counters -->
+        <div class="hero-stats-row">
+          <div class="stat-item">
+            <h4>1000<span>+</span></h4>
+            <p>Students Guided</p>
+          </div>
+          <div class="stat-item">
+            <h4>100<span>%</span></h4>
+            <p>Dedicated Mentorship</p>
+          </div>
+          <div class="stat-item">
+            <h4>AIR &amp; State</h4>
+            <p>Top Competitive Ranks</p>
+          </div>
+          <div class="stat-item">
+            <h4>Tamil Nadu &amp; Abroad</h4>
+            <p>Admission Networks</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Quick Admission Application Card -->
+      <div>
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <h3><i class="fas fa-user-graduate" style="color: var(--accent-gold);"></i> Admissions Open</h3>
+            <p>Apply for direct admission or career counseling</p>
+          </div>
+
+          <form action="{% url 'academy:admissions' %}" method="POST">
+            {% csrf_token %}
+            {{ quick_admission_form.website_hp }}
+            
+            <div class="form-group">
+              <label for="{{ quick_admission_form.student_name.id_for_label }}"><i class="fas fa-user"></i> Student Name *</label>
+              {{ quick_admission_form.student_name }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ quick_admission_form.phone.id_for_label }}"><i class="fas fa-phone"></i> Mobile Phone / WhatsApp *</label>
+              {{ quick_admission_form.phone }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ quick_admission_form.interested_course.id_for_label }}"><i class="fas fa-graduation-cap"></i> Interested Program / Course</label>
+              {{ quick_admission_form.interested_course }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ quick_admission_form.educational_qualification.id_for_label }}"><i class="fas fa-certificate"></i> Current Qualification *</label>
+              {{ quick_admission_form.educational_qualification }}
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+
+            <div style="text-align: center; margin-top: 12px; font-size: 0.78rem; color: #94A3B8;">
+              <i class="fas fa-lock"></i> Your information is secure. Our counselors will call you.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ACADEMY INTRODUCTION & SCOPE
+     ========================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">About the Institution</span>
+      <h2 class="section-title">A Broader Vision for Higher Education &amp; Career Success</h2>
+      <p class="section-subtitle">
+        Established under <strong>{{ trust_name }} (Reg. No. {{ trust_reg_no }})</strong>, WIN PROFESSIONAL ACADEMY delivers structured pathways connecting ambitious students with prestigious universities and fulfilling careers.
+      </p>
+    </div>
+
+    <div class="why-us-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-compass"></i></div>
+        <h4>Higher Education Guidance</h4>
+        <p>Personalized career mapping, eligibility analysis, and strategic counselling for premier university seats.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-university"></i></div>
+        <h4>Admission Assistance</h4>
+        <p>End-to-end guidance across Medical, Paramedical, Engineering, Agri, Law &amp; Arts in Tamil Nadu, India, and Abroad.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-square-root-alt"></i></div>
+        <h4>Specialized Mathematics</h4>
+        <p>Distinguished coaching for University Engineering Maths, UG/PG TRB, CSIR-NET JRF, GATE, and IIT-JAM.</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-briefcase"></i></div>
+        <h4>Job &amp; Career Services</h4>
+        <p>Competitive coaching, mock interview training, and preparation for government recruitment and lectureships.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ADMISSION GUIDANCE STREAMS
+     ========================================================================== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Comprehensive Admissions</span>
+      <h2 class="section-title">Guidance Across Professional Streams</h2>
+      <p class="section-subtitle">
+        We provide dedicated counseling and seat allotment guidance across Tamil Nadu, all-India institutions, and international universities.
+      </p>
+    </div>
+
+    <div class="guidance-grid">
+      {% for stream in guidance_streams %}
+      <div class="guidance-card">
+        <div class="guidance-icon-wrapper">
+          <i class="fas {{ stream.icon_name }}"></i>
+        </div>
+        <h3>{{ stream.name }}</h3>
+        <p>{{ stream.short_description }}</p>
+
+        {% if stream.key_specializations %}
+        <div class="guidance-specs">
+          <small>Key Specializations:</small>
+          <span>{{ stream.key_specializations }}</span>
+        </div>
+        {% endif %}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-color);">
+          <div class="guidance-scope-tag">
+            <i class="fas fa-globe-americas"></i> {{ stream.get_scope_display }}
+          </div>
+          <a href="{% url 'academy:admissions' %}?stream={{ stream.slug }}" class="btn btn-outline btn-sm">
+            Enquire Now <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     FEATURED MATHEMATICS COURSES
+     ========================================================================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Core Academic Offerings</span>
+      <h2 class="section-title">Specialized Mathematics Coaching Programs</h2>
+      <p class="section-subtitle">
+        Master university curriculum and conquer national &amp; state competitive examinations under expert faculty.
+      </p>
+    </div>
+
+    <div class="courses-grid">
+      {% for course in featured_courses %}
+      <div class="course-card">
+        <div class="course-card-header">
+          <span class="course-card-badge">{{ course.category.name|default:"Mathematics" }}</span>
+          <h3>{{ course.title }}</h3>
+          {% if course.target_audience %}
+          <div class="course-audience-tag">
+            <i class="fas fa-bullseye"></i> {{ course.target_audience }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="course-card-body">
+          <p class="course-desc">{{ course.short_description }}</p>
+
+          <div class="course-meta-pills">
+            <span class="meta-pill"><i class="fas fa-clock"></i> {{ course.duration }}</span>
+            <span class="meta-pill"><i class="fas fa-chalkboard"></i> {{ course.batch_mode }}</span>
+          </div>
+
+          <div class="course-card-footer">
+            <a href="{{ course.get_absolute_url }}" class="btn btn-secondary btn-sm" style="flex: 1;">
+              <i class="fas fa-info-circle"></i> View Syllabus
+            </a>
+            <a href="{% url 'academy:admissions' %}?course={{ course.slug }}" class="btn btn-primary btn-sm" style="flex: 1;">
+              <i class="fas fa-pencil-alt"></i> Enroll Now
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="{% url 'academy:courses' %}" class="btn btn-outline">
+        View All Academy Courses &amp; Programs <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     RESULTS & ACHIEVEMENTS PREVIEW
+     ========================================================================== -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Success Stories</span>
+      <h2 class="section-title">Recent Achievements &amp; Exam Ranks</h2>
+      <p class="section-subtitle">
+        Our students consistently secure top national &amp; state ranks in CSIR-NET, GATE, TRB, and IIT-JAM.
+      </p>
+    </div>
+
+    <div class="results-grid">
+      {% for res in featured_results %}
+      <div class="result-card">
+        <div class="result-top">
+          <span class="result-rank-badge"><i class="fas fa-trophy"></i> {{ res.rank }}</span>
+          <span class="badge badge-navy">{{ res.year }}</span>
+        </div>
+
+        <h3>{{ res.student_name }}</h3>
+        <div class="result-exam">{{ res.examination }}</div>
+        
+        {% if res.score %}
+        <div style="font-weight: 700; color: #1E293B; font-size: 0.88rem; margin-bottom: 8px;">
+          <i class="fas fa-star" style="color: var(--accent-gold);"></i> {{ res.score }}
+        </div>
+        {% endif %}
+
+        {% if res.description %}
+        <p class="result-desc">"{{ res.description }}"</p>
+        {% endif %}
+
+        <div class="result-footer">
+          <span><i class="fas fa-check-circle text-green"></i> Verified Result</span>
+          <span style="color: var(--accent-red); font-weight: 600;">Win Academy</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 36px;">
+      <a href="{% url 'academy:results' %}" class="btn btn-secondary">
+        Explore All Results &amp; Toppers <i class="fas fa-award"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     STRONG ADMISSIONS OPEN CTA BANNER
+     ========================================================================== -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="cta-banner">
+      <span class="badge" style="background: rgba(255,255,255,0.2); color: #FFFFFF; margin-bottom: 14px;">
+        <i class="fas fa-bell"></i> New Batches Starting Soon
+      </span>
+      <h2>Admissions Open for Academic Year 2026-2027</h2>
+      <p>
+        Get personal guidance from experienced mentors for higher education admissions and competitive mathematics coaching. Call our official helpline numbers directly:
+      </p>
+
+      <div class="cta-phones-wrap">
+        <a href="tel:{{ primary_phone|cut:' ' }}" class="cta-phone-pill">
+          <i class="fas fa-phone-alt"></i> {{ primary_phone }}
+        </a>
+        <a href="tel:{{ secondary_phone|cut:' ' }}" class="cta-phone-pill">
+          <i class="fas fa-phone-alt"></i> {{ secondary_phone }}
+        </a>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <a href="{% url 'academy:admissions' %}" class="btn btn-gold" style="font-size: 1.05rem; padding: 14px 30px;">
+          <i class="fas fa-paper-plane"></i> Apply Online Now
+        </a>
+        <a href="{% url 'academy:contact' %}" class="btn btn-outline-white" style="font-size: 1.05rem; padding: 14px 30px;">
+          <i class="fas fa-envelope"></i> Send an Inquiry
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

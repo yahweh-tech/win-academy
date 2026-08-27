@@ -1,0 +1,16 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+db.sqlite3
+.git/
+.gitignore
+.vscode/
+.idea/
+*.log
+local_test/
+media/cache/

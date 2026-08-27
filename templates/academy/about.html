@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | {{ academy_name }} - {{ trust_name }}{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<div class="course-detail-hero" style="padding: 56px 0; text-align: center;">
+  <div class="container">
+    <span class="badge badge-gold" style="margin-bottom: 12px;">Institutional Heritage</span>
+    <h1 style="color: #FFFFFF; font-size: 2.8rem; margin-bottom: 12px;">About WIN PROFESSIONAL ACADEMY</h1>
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid rgba(245,158,11,0.4);">
+      <i class="fas fa-shield-alt text-gold"></i>
+      <span style="color: #FCD34D; font-weight: 700; font-size: 0.9rem;">Run by {{ trust_name }} (Reg. No. {{ trust_reg_no }})</span>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Trust & Identity Showcase Card -->
+    <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 40px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <span class="section-badge">Our Motto &amp; Identity</span>
+        <h2 style="font-size: 2.2rem; color: var(--primary-navy); margin-bottom: 16px;">
+          "{{ tagline }}"
+        </h2>
+        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 24px;">
+          WIN PROFESSIONAL ACADEMY is an esteemed educational sanctuary founded on the commitment to guide students towards their highest academic and career potential. Beyond standard classroom instruction, we operate as a comprehensive educational consultancy and advanced competitive coaching centre, assisting families and students navigate college admissions and professional certifications.
+        </p>
+      </div>
+    </div>
+
+    <!-- Mission & Vision Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 50px;">
+      <!-- Mission -->
+      <div style="background: linear-gradient(135deg, #0A192F 0%, #112240 100%); color: #FFFFFF; border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+        <div style="font-size: 2.5rem; color: var(--accent-red); margin-bottom: 16px;">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3 style="color: #FFFFFF; font-size: 1.6rem; margin-bottom: 14px;">Our Mission</h3>
+        <p style="color: #CBD5E1; font-size: 1rem; line-height: 1.7;">
+          {{ academy_profile.mission }}
+        </p>
+      </div>
+
+      <!-- Vision -->
+      <div style="background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); color: #FFFFFF; border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-md); position: relative; overflow: hidden;">
+        <div style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 16px;">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3 style="color: #FFFFFF; font-size: 1.6rem; margin-bottom: 14px;">Our Vision</h3>
+        <p style="color: #CBD5E1; font-size: 1rem; line-height: 1.7;">
+          {{ academy_profile.vision }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Higher Education Guidance & Job Services Breakdown -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-bottom: 60px;">
+      <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+          <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-red-light); color: var(--accent-red); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3 style="color: var(--primary-navy); font-size: 1.45rem;">Higher Education Guidance</h3>
+        </div>
+        <p style="font-size: 0.98rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 16px;">
+          {{ academy_profile.higher_education_guidance }}
+        </p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; color: var(--text-main); font-weight: 600; font-size: 0.92rem;">
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> Medical &amp; Paramedical Counselling (NEET / Direct)</li>
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> Engineering TNEA &amp; Autonomous Seat Allocation</li>
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> TNAU Agriculture &amp; Law University Admissions</li>
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> Overseas &amp; Central University Admissions</li>
+        </ul>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-sm);">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+          <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--accent-gold-light); color: #B45309; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <h3 style="color: var(--primary-navy); font-size: 1.45rem;">Job &amp; Career Services</h3>
+        </div>
+        <p style="font-size: 0.98rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 16px;">
+          {{ academy_profile.job_services_guidance }}
+        </p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; color: var(--text-main); font-weight: 600; font-size: 0.92rem;">
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> UG / PG TRB Teachers Recruitment Exam Coaching</li>
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> CSIR-NET JRF / Assistant Professorship Preparation</li>
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> GATE MA Preparation for IITs &amp; PSUs</li>
+          <li><i class="fas fa-check text-green" style="margin-right: 8px;"></i> IIT-JAM Coaching for M.Sc at Premier Institutes</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Official Helpline Callout -->
+    <div class="cta-banner">
+      <h2>Speak with Our Academic Counselors Today</h2>
+      <p>
+        Call us directly or visit our academy office to discuss course enrollments or college admissions.
+      </p>
+      <div class="cta-phones-wrap">
+        <a href="tel:{{ primary_phone|cut:' ' }}" class="cta-phone-pill">
+          <i class="fas fa-phone-alt"></i> {{ primary_phone }}
+        </a>
+        <a href="tel:{{ secondary_phone|cut:' ' }}" class="cta-phone-pill">
+          <i class="fas fa-phone-alt"></i> {{ secondary_phone }}
+        </a>
+      </div>
+      <a href="{% url 'academy:contact' %}" class="btn btn-gold">
+        <i class="fas fa-map-marker-alt"></i> Contact Our Academy Office
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

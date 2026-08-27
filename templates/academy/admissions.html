@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admissions Open &amp; Career Guidance Application | {{ academy_name }}{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<div class="course-detail-hero" style="padding: 56px 0; text-align: center;">
+  <div class="container">
+    <span class="badge badge-gold" style="margin-bottom: 12px;"><i class="fas fa-bullhorn"></i> Academic Year 2026 - 2027</span>
+    <h1 style="color: #FFFFFF; font-size: 2.8rem; margin-bottom: 12px;">Admissions Open &amp; Counseling Application</h1>
+    <p style="color: #CBD5E1; max-width: 720px; margin: 0 auto; font-size: 1.05rem;">
+      Apply online for Mathematics coaching batches or personalized higher education admission guidance. Our academic counselors will get in touch with you directly.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="max-width: 840px; margin: 0 auto;">
+      <!-- Main Application Form Box -->
+      <div class="form-box">
+        <div style="text-align: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
+          <span class="section-badge">Student Registration</span>
+          <h2 style="font-size: 1.9rem; color: var(--primary-navy); margin-bottom: 8px;">Admission &amp; Guidance Form</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Please complete the details below to reserve your seat or schedule an in-person / telephone counseling session.
+          </p>
+        </div>
+
+        <form action="{% url 'academy:admissions' %}" method="POST">
+          {% csrf_token %}
+          {{ form.website_hp }}
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <!-- Student Name -->
+            <div class="form-group">
+              <label for="{{ form.student_name.id_for_label }}"><i class="fas fa-user"></i> Student Full Name *</label>
+              {{ form.student_name }}
+              {% if form.student_name.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.student_name.errors.0 }}</div>{% endif %}
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="{{ form.phone.id_for_label }}"><i class="fas fa-phone"></i> Mobile Phone / WhatsApp *</label>
+              {{ form.phone }}
+              {% if form.phone.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.phone.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <!-- Email -->
+            <div class="form-group">
+              <label for="{{ form.email.id_for_label }}"><i class="fas fa-envelope"></i> Email Address (Optional)</label>
+              {{ form.email }}
+              {% if form.email.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.email.errors.0 }}</div>{% endif %}
+            </div>
+
+            <!-- Current Qualification -->
+            <div class="form-group">
+              <label for="{{ form.educational_qualification.id_for_label }}"><i class="fas fa-graduation-cap"></i> Current Qualification *</label>
+              {{ form.educational_qualification }}
+              {% if form.educational_qualification.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.educational_qualification.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <!-- Mathematics Course Selection -->
+            <div class="form-group">
+              <label for="{{ form.interested_course.id_for_label }}"><i class="fas fa-calculator"></i> Mathematics Coaching Course</label>
+              {{ form.interested_course }}
+              {% if form.interested_course.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.interested_course.errors.0 }}</div>{% endif %}
+            </div>
+
+            <!-- Admission Guidance Stream -->
+            <div class="form-group">
+              <label for="{{ form.interested_stream.id_for_label }}"><i class="fas fa-university"></i> Higher Education Guidance Stream</label>
+              {{ form.interested_stream }}
+              {% if form.interested_stream.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.interested_stream.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="{{ form.message.id_for_label }}"><i class="fas fa-comment-dots"></i> Additional Query / Preferred Timings (Optional)</label>
+            {{ form.message }}
+            {% if form.message.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.message.errors.0 }}</div>{% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px; margin-top: 12px;">
+            <i class="fas fa-paper-plane"></i> Submit Application for Review
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--text-muted);">
+          <i class="fas fa-shield-alt text-gold"></i> Submissions are managed securely under <strong>{{ trust_name }} (Reg. No. {{ trust_reg_no }})</strong>.
+        </div>
+      </div>
+
+      <!-- Emergency Hotline Card -->
+      <div style="margin-top: 36px; background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 100%); color: #FFFFFF; border-radius: var(--radius-lg); padding: 28px; text-align: center;">
+        <h4 style="color: #FFFFFF; font-size: 1.25rem; margin-bottom: 8px;">Prefer to speak with an admissions officer now?</h4>
+        <p style="color: #CBD5E1; font-size: 0.92rem; margin-bottom: 20px;">
+          Call directly during office hours (9:00 AM – 7:00 PM):
+        </p>
+        <div class="cta-phones-wrap" style="margin-bottom: 0;">
+          <a href="tel:{{ primary_phone|cut:' ' }}" class="cta-phone-pill">
+            <i class="fas fa-phone-alt"></i> {{ primary_phone }}
+          </a>
+          <a href="tel:{{ secondary_phone|cut:' ' }}" class="cta-phone-pill">
+            <i class="fas fa-phone-alt"></i> {{ secondary_phone }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

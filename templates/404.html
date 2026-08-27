@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found (404) | {{ academy_name }}{% endblock %}
+
+{% block content %}
+<section class="section" style="padding: 100px 0; text-align: center;">
+  <div class="container">
+    <div style="max-width: 600px; margin: 0 auto; background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 50px 30px; box-shadow: var(--shadow-md);">
+      <div style="font-size: 4rem; color: var(--accent-red); font-weight: 900; margin-bottom: 12px;">404</div>
+      <h2 style="color: var(--primary-navy); font-size: 1.8rem; margin-bottom: 12px;">Page Not Found</h2>
+      <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 28px;">
+        The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <a href="{% url 'academy:home' %}" class="btn btn-primary">
+          <i class="fas fa-home"></i> Back to Homepage
+        </a>
+        <a href="{% url 'academy:courses' %}" class="btn btn-outline">
+          <i class="fas fa-book"></i> View Courses
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

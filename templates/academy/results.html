@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Results &amp; Achievements | {{ academy_name }}{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<div class="course-detail-hero" style="padding: 56px 0; text-align: center;">
+  <div class="container">
+    <span class="badge badge-gold" style="margin-bottom: 12px;"><i class="fas fa-trophy"></i> Hall of Fame</span>
+    <h1 style="color: #FFFFFF; font-size: 2.8rem; margin-bottom: 12px;">Student Results &amp; Achievements</h1>
+    <p style="color: #CBD5E1; max-width: 720px; margin: 0 auto; font-size: 1.05rem;">
+      Celebrating the outstanding achievements of our students who secured prestigious All-India and State ranks across CSIR-NET, GATE, TRB, and IIT-JAM.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Filter Pills -->
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px;">
+      <a href="{% url 'academy:results' %}" class="btn btn-sm {% if not selected_exam %}btn-primary{% else %}btn-outline{% endif %}">
+        All Examinations
+      </a>
+      {% for exam in available_exams %}
+      <a href="{% url 'academy:results' %}?exam={{ exam|urlencode }}" class="btn btn-sm {% if selected_exam == exam %}btn-primary{% else %}btn-outline{% endif %}">
+        {{ exam }}
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- Results Grid -->
+    {% if results %}
+    <div class="results-grid">
+      {% for res in results %}
+      <div class="result-card">
+        <div class="result-top">
+          <span class="result-rank-badge"><i class="fas fa-medal"></i> {{ res.rank }}</span>
+          <span class="badge badge-navy">{{ res.year }}</span>
+        </div>
+
+        <h3>{{ res.student_name }}</h3>
+        <div class="result-exam">{{ res.examination }}</div>
+        
+        {% if res.score %}
+        <div style="font-weight: 700; color: #1E293B; font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+          <i class="fas fa-star" style="color: var(--accent-gold);"></i> {{ res.score }}
+        </div>
+        {% endif %}
+
+        {% if res.description %}
+        <p class="result-desc">"{{ res.description }}"</p>
+        {% endif %}
+
+        <div class="result-footer">
+          <span><i class="fas fa-check-circle" style="color: #10B981;"></i> Verified Selection</span>
+          <span style="color: var(--accent-red); font-weight: 700;">Win Academy</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 60px 20px; background: #FFFFFF; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+      <h3>No results found for the selected examination</h3>
+      <a href="{% url 'academy:results' %}" class="btn btn-primary" style="margin-top: 16px;">View All Results</a>
+    </div>
+    {% endif %}
+
+    <!-- Bottom Action CTA -->
+    <div style="text-align: center; margin-top: 60px; background: var(--bg-alt); padding: 40px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+      <h3 style="color: var(--primary-navy); font-size: 1.6rem; margin-bottom: 8px;">Want to be our next top ranker?</h3>
+      <p style="color: var(--text-muted); margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Join our rigorous, concept-driven coaching batches with personal mentorship and daily practice drills.
+      </p>
+      <a href="{% url 'academy:admissions' %}" class="btn btn-primary">
+        <i class="fas fa-paper-plane"></i> Apply for Upcoming Batch
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

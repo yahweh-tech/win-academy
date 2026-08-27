@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | {{ academy_name }}{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<div class="course-detail-hero" style="padding: 56px 0; text-align: center;">
+  <div class="container">
+    <span class="badge badge-gold" style="margin-bottom: 12px;"><i class="fas fa-headset"></i> Get In Touch</span>
+    <h1 style="color: #FFFFFF; font-size: 2.8rem; margin-bottom: 12px;">Contact WIN PROFESSIONAL ACADEMY</h1>
+    <p style="color: #CBD5E1; max-width: 680px; margin: 0 auto; font-size: 1.05rem;">
+      Have a question about admissions, course batches, or higher education counseling? Call our official helplines or send an enquiry below.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <!-- Left Column: Official Contact Numbers & Information -->
+      <div class="contact-info-panel">
+        <h3>Contact Information</h3>
+        <p>
+          Reach out directly to our principal counselors and administrative officers:
+        </p>
+
+        <!-- Phone 1 -->
+        <div class="contact-card-item">
+          <div class="contact-icon-bubble"><i class="fas fa-phone-alt"></i></div>
+          <div>
+            <h5>Primary Helpline</h5>
+            <a href="tel:{{ primary_phone|cut:' ' }}">{{ primary_phone }}</a>
+          </div>
+        </div>
+
+        <!-- Phone 2 -->
+        <div class="contact-card-item">
+          <div class="contact-icon-bubble"><i class="fas fa-mobile-alt"></i></div>
+          <div>
+            <h5>Secondary Helpline</h5>
+            <a href="tel:{{ secondary_phone|cut:' ' }}">{{ secondary_phone }}</a>
+          </div>
+        </div>
+
+        <!-- WhatsApp Support -->
+        <div class="contact-card-item">
+          <div class="contact-icon-bubble" style="background: rgba(16,185,129,0.2); color: #4ADE80;"><i class="fab fa-whatsapp"></i></div>
+          <div>
+            <h5>Instant WhatsApp</h5>
+            <a href="https://wa.me/91{{ academy_profile.whatsapp_number }}" target="_blank" rel="noopener noreferrer" style="color: #4ADE80;">+91 {{ academy_profile.whatsapp_number }}</a>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="contact-card-item">
+          <div class="contact-icon-bubble"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h5>Official Email</h5>
+            <a href="mailto:{{ academy_profile.email }}">{{ academy_profile.email }}</a>
+          </div>
+        </div>
+
+        <!-- Legal Trust Registration -->
+        <div class="contact-card-item">
+          <div class="contact-icon-bubble" style="background: rgba(245,158,11,0.2); color: #FCD34D;"><i class="fas fa-certificate"></i></div>
+          <div>
+            <h5>Managing Trust</h5>
+            <span style="color: #FFFFFF; font-size: 0.95rem;">{{ trust_name }}</span>
+            <div style="font-size: 0.82rem; color: #FCD34D; font-weight: 700; margin-top: 2px;">Reg. No. {{ trust_reg_no }}</div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="contact-card-item">
+          <div class="contact-icon-bubble"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h5>Location &amp; Jurisdiction</h5>
+            <span style="color: #CBD5E1; font-size: 0.95rem;">{{ academy_profile.address }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Working Contact Form -->
+      <div class="form-box">
+        <h2 style="font-size: 1.8rem; color: var(--primary-navy); margin-bottom: 8px;">Send an Enquiry</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">
+          Fill out the form below. All enquiries are saved and attended to promptly by our counseling team.
+        </p>
+
+        <form action="{% url 'academy:contact' %}" method="POST">
+          {% csrf_token %}
+          {{ form.website_hp }}
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="{{ form.name.id_for_label }}"><i class="fas fa-user"></i> Full Name *</label>
+              {{ form.name }}
+              {% if form.name.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.name.errors.0 }}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ form.phone.id_for_label }}"><i class="fas fa-phone"></i> Mobile Phone *</label>
+              {{ form.phone }}
+              {% if form.phone.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.phone.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="{{ form.email.id_for_label }}"><i class="fas fa-envelope"></i> Email (Optional)</label>
+              {{ form.email }}
+              {% if form.email.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.email.errors.0 }}</div>{% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ form.subject.id_for_label }}"><i class="fas fa-tag"></i> Subject / Topic *</label>
+              {{ form.subject }}
+              {% if form.subject.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.subject.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.message.id_for_label }}"><i class="fas fa-comment-alt"></i> Your Message / Enquiry *</label>
+            {{ form.message }}
+            {% if form.message.errors %}<div style="color: #DC2626; font-size: 0.8rem; margin-top: 4px;">{{ form.message.errors.0 }}</div>{% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 14px;">
+            <i class="fas fa-paper-plane"></i> Submit Enquiry
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

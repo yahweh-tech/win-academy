@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Courses &amp; Coaching Programs | {{ academy_name }}{% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<div class="course-detail-hero" style="padding: 48px 0; text-align: center;">
+  <div class="container">
+    <span class="badge badge-gold" style="margin-bottom: 12px;">Academic Offerings</span>
+    <h1 style="color: #FFFFFF; font-size: 2.6rem; margin-bottom: 10px;">Courses &amp; Coaching Programs</h1>
+    <p style="color: #CBD5E1; max-width: 680px; margin: 0 auto; font-size: 1.05rem;">
+      Rigorous, syllabus-oriented mathematics coaching and specialized admission pathways designed for student distinction.
+    </p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Filter & Search Bar -->
+    <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
+      <form action="{% url 'academy:courses' %}" method="GET" style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+        <!-- Search Input -->
+        <div style="flex: 1; min-width: 260px; position: relative;">
+          <input type="text" name="q" value="{{ search_query }}" placeholder="Search courses, syllabus topics, exams..." class="form-control" style="padding-left: 38px;">
+          <i class="fas fa-search" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+          <a href="{% url 'academy:courses' %}" class="btn btn-sm {% if not selected_category %}btn-secondary{% else %}btn-outline{% endif %}">
+            All Programs
+          </a>
+          {% for cat in categories %}
+          <a href="{% url 'academy:courses' %}?category={{ cat.slug }}" class="btn btn-sm {% if selected_category == cat.slug %}btn-secondary{% else %}btn-outline{% endif %}">
+            {{ cat.name }}
+          </a>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary btn-sm">
+            <i class="fas fa-filter"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Courses Grid -->
+    {% if courses %}
+    <div class="courses-grid">
+      {% for course in courses %}
+      <div class="course-card">
+        <div class="course-card-header">
+          <span class="course-card-badge">{{ course.category.name|default:"Mathematics" }}</span>
+          <h3>{{ course.title }}</h3>
+          {% if course.target_audience %}
+          <div class="course-audience-tag">
+            <i class="fas fa-bullseye"></i> {{ course.target_audience }}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="course-card-body">
+          <p class="course-desc">{{ course.short_description }}</p>
+
+          <div class="course-meta-pills">
+            <span class="meta-pill"><i class="fas fa-clock"></i> {{ course.duration }}</span>
+            <span class="meta-pill"><i class="fas fa-chalkboard"></i> {{ course.batch_mode }}</span>
+          </div>
+
+          <div class="course-card-footer">
+            <a href="{{ course.get_absolute_url }}" class="btn btn-secondary btn-sm" style="flex: 1;">
+              <i class="fas fa-info-circle"></i> Details &amp; Syllabus
+            </a>
+            <a href="{% url 'academy:admissions' %}?course={{ course.slug }}" class="btn btn-primary btn-sm" style="flex: 1;">
+              <i class="fas fa-pencil-alt"></i> Apply Now
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 60px 20px; background: #FFFFFF; border-radius: var(--radius-lg); border: 1px solid var(--border-color);">
+      <div style="font-size: 3rem; color: #94A3B8; margin-bottom: 16px;"><i class="fas fa-search"></i></div>
+      <h3 style="margin-bottom: 8px;">No courses matched your query</h3>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">Try searching for a different keyword or view all available coaching courses.</p>
+      <a href="{% url 'academy:courses' %}" class="btn btn-primary">Reset Filters</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

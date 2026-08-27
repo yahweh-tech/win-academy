@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ course.title }} | {{ academy_name }}{% endblock %}
+
+{% block content %}
+<!-- Course Hero Banner -->
+<div class="course-detail-hero">
+  <div class="container">
+    <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+      <a href="{% url 'academy:courses' %}" style="color: #94A3B8; font-size: 0.88rem;">
+        <i class="fas fa-arrow-left"></i> All Courses
+      </a>
+      <span style="color: rgba(255,255,255,0.4);">/</span>
+      <span class="badge badge-gold">{{ course.category.name|default:"Mathematics" }}</span>
+    </div>
+
+    <h1 style="color: #FFFFFF; font-size: 2.8rem; margin-bottom: 12px;">{{ course.title }}</h1>
+    
+    {% if course.target_audience %}
+    <div style="font-size: 1.15rem; color: #FCD34D; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+      <i class="fas fa-bullseye" style="color: #EF4444;"></i> {{ course.target_audience }}
+    </div>
+    {% endif %}
+
+    <div style="display: flex; gap: 24px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12);">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: #E2E8F0;">
+        <i class="fas fa-clock" style="color: var(--accent-red);"></i> <strong>Duration:</strong> {{ course.duration }}
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: #E2E8F0;">
+        <i class="fas fa-user-check" style="color: var(--accent-gold);"></i> <strong>Eligibility:</strong> {{ course.eligibility }}
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.95rem; color: #E2E8F0;">
+        <i class="fas fa-chalkboard-teacher" style="color: #60A5FA;"></i> <strong>Mode:</strong> {{ course.batch_mode }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="course-detail-layout">
+      <!-- Left Column: Full Description, Syllabus & Materials -->
+      <div>
+        <!-- Course Overview -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 32px; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.6rem; color: var(--primary-navy); margin-bottom: 16px;">
+            <i class="fas fa-book-reader" style="color: var(--accent-red); margin-right: 8px;"></i> Course Overview
+          </h2>
+          <div style="font-size: 1.02rem; line-height: 1.8; color: var(--text-muted); white-space: pre-line;">
+            {{ course.full_description }}
+          </div>
+        </div>
+
+        <!-- Syllabus Breakdown -->
+        {% if course.syllabus %}
+        <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 32px; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.6rem; color: var(--primary-navy); margin-bottom: 16px;">
+            <i class="fas fa-list-ol" style="color: var(--accent-red); margin-right: 8px;"></i> Curriculum &amp; Syllabus Outline
+          </h2>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+            Structured unit-by-unit syllabus aligned strictly with standard university curricula and official competitive exam patterns.
+          </p>
+
+          <ul class="syllabus-list">
+            {% for item in course.syllabus_list %}
+            <li class="syllabus-item">
+              <i class="fas fa-check-circle"></i>
+              <span>{{ item }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- Downloadable Study Materials & Notes -->
+        <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 32px; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.6rem; color: var(--primary-navy); margin-bottom: 16px;">
+            <i class="fas fa-file-download" style="color: var(--accent-red); margin-right: 8px;"></i> Study Materials, Notes &amp; Books
+          </h2>
+          
+          {% if materials %}
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+            Download verified study resources, formula sheets, and reference notes:
+          </p>
+
+          {% for mat in materials %}
+          <div class="material-card">
+            <div class="material-info">
+              <div class="material-type-icon">
+                {% if mat.material_type == 'PDF' %}
+                  <i class="fas fa-file-pdf"></i>
+                {% elif mat.material_type == 'BOOK' %}
+                  <i class="fas fa-book"></i>
+                {% elif mat.material_type == 'NOTE' %}
+                  <i class="fas fa-sticky-note"></i>
+                {% else %}
+                  <i class="fas fa-file-alt"></i>
+                {% endif %}
+              </div>
+              <div>
+                <h4 style="font-size: 1.05rem; color: var(--primary-navy); margin-bottom: 4px;">{{ mat.title }}</h4>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                  <span class="badge badge-navy" style="margin-right: 6px;">{{ mat.get_material_type_display }}</span>
+                  {% if mat.description %}<span>{{ mat.description }}</span>{% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% if mat.file %}
+            <a href="{% url 'academy:download_material' mat.id %}" class="btn btn-primary btn-sm" download>
+              <i class="fas fa-download"></i> Download {{ mat.file_extension }}
+            </a>
+            {% else %}
+            <span class="badge badge-gold"><i class="fas fa-clock"></i> In Class Batch</span>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          {% else %}
+          <div style="background: var(--bg-alt); padding: 20px; border-radius: var(--radius-md); text-align: center; color: var(--text-muted);">
+            <i class="fas fa-info-circle"></i> Complete physical and digital study kits are distributed upon enrollment to registered students.
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right Column: Quick Admission / Enrollment Form -->
+      <div>
+        <div style="position: sticky; top: 90px; background: #FFFFFF; border: 2px solid var(--accent-red); border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-xl);">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <span class="badge badge-red" style="margin-bottom: 8px;">Admissions Open</span>
+            <h3 style="color: var(--primary-navy); font-size: 1.4rem;">Enroll in this Course</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Direct seat reservation &amp; counselor call</p>
+          </div>
+
+          <form action="{% url 'academy:admissions' %}" method="POST">
+            {% csrf_token %}
+            {{ application_form.website_hp }}
+
+            <div class="form-group">
+              <label for="{{ application_form.student_name.id_for_label }}">Student Full Name *</label>
+              {{ application_form.student_name }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ application_form.phone.id_for_label }}">Mobile Phone / WhatsApp *</label>
+              {{ application_form.phone }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ application_form.educational_qualification.id_for_label }}">Current Qualification *</label>
+              {{ application_form.educational_qualification }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ application_form.interested_course.id_for_label }}">Selected Course</label>
+              {{ application_form.interested_course }}
+            </div>
+
+            <div class="form-group">
+              <label for="{{ application_form.message.id_for_label }}">Questions / Batch Preference</label>
+              {{ application_form.message }}
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+              <i class="fas fa-paper-plane"></i> Submit Enrollment
+            </button>
+
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-color); text-align: center;">
+              <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Need immediate batch details?</div>
+              <a href="tel:{{ primary_phone|cut:' ' }}" class="btn btn-outline btn-sm" style="width: 100%;">
+                <i class="fas fa-phone-alt"></i> Call Helpline: {{ primary_phone }}
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- SEO Meta Tags -->
+  <title>{% block title %}{{ page_title|default:academy_name }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ academy_name }} - {{ tagline }}. Run by {{ trust_name }} (Reg. No. {{ trust_reg_no }}). Higher education admissions and competitive mathematics coaching.{% endblock %}">
+  <meta name="keywords" content="Win Professional Academy, Higher Education Guidance Tamil Nadu, Medical Admission, Engineering Admission, TRB Mathematics, CSIR-NET Maths, GATE Maths, IIT-JAM Maths, Paramedical, Agriculture, Law Admissions">
+  <meta name="author" content="{{ academy_name }}">
+  <meta name="robots" content="index, follow">
+
+  <!-- OpenGraph / Social Meta Tags -->
+  <meta property="og:title" content="{% block og_title %}{{ page_title|default:academy_name }}{% endblock %}">
+  <meta property="og:description" content="{{ tagline }} - Run by {{ trust_name }} (Reg. No. {{ trust_reg_no }})">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ academy_name }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Design System & Stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  {% include 'includes/navbar.html' %}
+
+  <!-- Flash Messages -->
+  {% include 'includes/messages.html' %}
+
+  <!-- Main Dynamic Page Content -->
+  <main id="main-content">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Global Footer -->
+  {% include 'includes/footer.html' %}
+
+  <!-- Scripts -->
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
